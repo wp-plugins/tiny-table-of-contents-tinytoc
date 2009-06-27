@@ -4,42 +4,17 @@
  * @link http://www.php4every1.com
  */
 
-//Disable direct view.
-if (!defined('IN_PLUGIN'))
-    die('You can not access this file directly.');
-
-//Update settings
-$keys = array(
-    'tinytoc_settings_enabled',
-    'tinytoc_settings_header',
-    'tinytoc_settings_general',
-    'tinytoc_settings_parse',
-    'tinytoc_settings_backtotop',
-    'tinytoc_settings_tocstyle',
-    'tinytoc_settings_info'
-);
-
-$autoload = array(
-    'yes',
-    'no',
-    'no',
-	'no',
-	'no',
-	'no',
-	'no'
-);
-
-$settings = array();
-$settings[] = '1';
+/*
+add_option('tinytoc_settings_enabled', '1', '', 'yes');
 
 $config = new stdClass();
 
 $config->title = 'Table of content';
-$config->before = '<h3 id="tinyTOC">';
+$config->before = '<h3>';
 $config->after = '</h3>';
 $config->css = '';
 
-$settings[] = $config;
+add_option('tinytoc_settings_header', $config, '', 'no');
 
 $config = new stdClass();
 
@@ -47,17 +22,10 @@ $config->maxLevelNum = 3;
 $config->useBackToTop = true;
 $config->useGoTo = true;
 $config->priority = 8;
-$config->removeWhenNotUsed = true;
-$config->tocOnAllPages = false;
 
-$settings[] = $config;
+add_option('tinytoc_settings_general', $config, '', 'no');
 
 $config = new stdClass();
-
-if (isset($_POST['parseAnyArchive'])) {
-    $_POST['parseCategory'] = '1';
-    $_POST['parseDate'] = '1';
-}
 
 $config->parsePage = true;
 $config->parsePost = true;
@@ -70,15 +38,15 @@ $config->parseAnyArchive = true;
 $config->pageExclude = array();
 $config->postExclude = array();
 
-$settings[] = $config;
+add_option('tinytoc_settings_parse', $config, '', 'no');
 
 $config = new stdClass();
 
 $config->image = '';
-$config->text = ' <small><a href="#tinyTOC">Top</a></small>';
+$config->text = '<small>Top</small>';
 $config->css = '';
 
-$settings[] = $config;
+add_option('tinytoc_settings_backtotop', $config, '', 'no');
 
 $config = new stdClass();
 
@@ -88,17 +56,15 @@ $config->startItem = '<li>';
 $config->endItem = '</li>';
 $config->css = '';
 
-$settings[] = $config;
+add_option('tinytoc_settings_tocstyle', $config, '', 'no');
 
 $config = new stdClass();
 
 $config->name = 'Tiny Table Of Content - TinyTOC';
-$config->version = '0.3';
+$config->version = '0.3 Beta';
 $config->home = 'http://www.php4every1.com';
 $config->author = 'Marijan Šuflaj';
 $config->email = 'msufflaj32@gmail.com';
 $config->authorHome = 'http://www.php4every1.com';
 
-$settings[] = $config;
-
-tinyConfig::getInstance()->create($keys, $settings, $autoload, 'no');
+add_option('tinytoc_settings_info', $config, '', 'no');*/

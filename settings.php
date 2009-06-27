@@ -1,7 +1,12 @@
 <?php
+/**
+ * @author Marijan Šuflaj <msufflaj32@gmail.com>
+ * @link http://www.php4every1.com
+ */
+
 //Disable direct view.
-defined('IN_PLUGIN')
-    or die('You can not access this file directly.');
+if (!defined('IN_PLUGIN'))
+    die('You can not access this file directly.');
 ?>
 <script type="text/javascript">
 <!--
@@ -21,10 +26,10 @@ function incDecLevelNum(inc)
     
     <?php
     if (isset($_POST['update']))
-        include 'updateSettings.php';
+        require_once 'updateSettings.php';
         
     if (isset($_POST['default']))
-        include 'resetSettings.php';
+        require_once 'resetSettings.php';
         
     $config = tinyConfig::getInstance()->get('');
     ?>
@@ -87,6 +92,22 @@ function incDecLevelNum(inc)
 	                    <input type="checkbox" name="useGoTo" <?php checked('1', $config->tinytoc_settings_general->useGoTo); ?> />
 	                </td>
 	            </tr>
+                <tr>
+                    <td>
+                        Remove when not used:
+                    </td>
+                    <td>
+                        <input type="checkbox" name="removeWhenNotUsed" <?php checked('1', $config->tinytoc_settings_general->removeWhenNotUsed); ?> />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        TOC on all pages:
+                    </td>
+                    <td>
+                        <input type="checkbox" name="tocOnAllPages" <?php checked('1', $config->tinytoc_settings_general->tocOnAllPages); ?> />
+                    </td>
+                </tr>
 	        </tbody>
 	    </table>
 	    

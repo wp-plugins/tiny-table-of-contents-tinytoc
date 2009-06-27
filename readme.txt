@@ -3,7 +3,7 @@ Contributors: zlikavac32
 Tags: content, table, tiny, tinytoc, toc, bookmark
 Requires at least: 2.0.2
 Tested up to: 2.7
-Stable tag: 0.3
+Stable tag: 0.7
 
 Plugin that enables you to create table of contents in your posts and pages. It's very simple to use from your editor.
 
@@ -14,6 +14,29 @@ it will not parse. It's very simple to use from your editor
 so you do not have to manualy enter tags. Now it's nothing special, but later it will have much more features including
 some predefined styles and more styling control.
 
+`TODO`
+
+* Add custom TOC position
+* Add custom text before TOC
+
+`Changelog`
+
+Ver 0.7 (released 2009-06-27)
+-------------------------------------------------------------------
+* Fixed problem when parsing home page (<!--more--> tag)
+* Fixed some small parsing bugs
+* Optimized script
+* Fixed creating of TOC problem (nested loops problem)
+* Fixed chapter parsing in TOC (now all styling is removed)
+* Added "Remove when not used" feature
+* Added "TOC on all pages" feature
+
+Ver 0.3 (released 2009-05-21)
+-------------------------------------------------------------------
+* Plugin first version
+
+First version of the plugin.
+
 == Installation ==
 
 1. Upload folder `tinytoc` to your `/wp-content/plugins` directory
@@ -21,7 +44,25 @@ some predefined styles and more styling control.
 
 == Frequently Asked Questions ==
 
-No questions for now.
+Q: Now do I use this plugin?
+A: When you go to your post editor you will see drop down menu "TOC Levels".
+Select you chapter and then chose one of the levels. Or you can manualy wrap your
+chapter in [tinytoc level="ln"]cont[/tinytoc] tags where ln is your level (number)
+and cont is you chapter.
+
+Q: How to use image as "Back to top" button?
+A: You can add image values to image field and in text create place holder by placing "%image%"
+or you cand add <img /> tag to your text.
+
+Q: Can I add text before TOC?
+A: Currently you can not, but it will be avilable in next version.
+
+Q: Can I chose TOC position?
+A: No, you can not, but it will also be avilable in next version.
+
+Q: How do you know what each of these fields mean?
+A: Go to http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/#Documentation-1 or if you want documentation 
+on Croatian go to http://hr.php4every1.com/skripte/tiny-table-of-contents-wordpress-plugin/#Dokumentacija-1 .
 
 == Screenshots ==
 

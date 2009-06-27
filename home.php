@@ -1,7 +1,12 @@
 <?php
+/**
+ * @author Marijan Šuflaj <msufflaj32@gmail.com>
+ * @link http://www.php4every1.com
+ */
+
 //Disable direct view.
-defined('IN_PLUGIN')
-    or die('You can not access this file directly.');
+if (!defined('IN_PLUGIN'))
+    die('You can not access this file directly.');
     
 $config = tinyConfig::getInstance()->get('');
 ?>
@@ -97,6 +102,22 @@ $config = tinyConfig::getInstance()->get('');
                 </td>
                 <td>
                     <?php echo ((bool) $config->tinytoc_settings_general->useGoTo === true) ? 'true' : 'false'; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Remove when not used:
+                </td>
+                <td>
+                    <?php echo ((bool) $config->tinytoc_settings_general->removeWhenNotUsed === true) ? 'true' : 'false'; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    TOC on all pages:
+                </td>
+                <td>
+                    <?php echo ((bool) $config->tinytoc_settings_general->tocOnAllPages === true) ? 'true' : 'false'; ?>
                 </td>
             </tr>
         </tbody>

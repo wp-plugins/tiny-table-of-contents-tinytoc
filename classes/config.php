@@ -1,7 +1,12 @@
 <?php
+/**
+ * @author Marijan Šuflaj <msufflaj32@gmail.com>
+ * @link http://www.php4every1.com
+ */
+
 //Disable direct view.
-defined('IN_PLUGIN')
-    or die('You can not access this file directly.');
+if (!defined('IN_PLUGIN'))
+    die('You can not access this file directly.');
 
 /**
  * Config class
@@ -198,7 +203,7 @@ class tinyConfig
      * @param string $name Option name
      * @since 0.3
      */
-	public function _delete($name)
+	private function _delete($name)
 	{
 		unset($this->_config->$name);
 	}

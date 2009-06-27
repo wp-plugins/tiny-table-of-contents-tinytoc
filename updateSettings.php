@@ -1,7 +1,12 @@
 <?php
+/**
+ * @author Marijan Šuflaj <msufflaj32@gmail.com>
+ * @link http://www.php4every1.com
+ */
+
 //Disable direct view.
-defined('IN_PLUGIN')
-    or die('You can not access this file directly.');
+if (!defined('IN_PLUGIN'))
+    die('You can not access this file directly.');
 
 //Update settings
 $keys = array(
@@ -31,14 +36,16 @@ $config->maxLevelNum = (int) $_POST['maxLevelNum'];
 $config->useBackToTop = (isset($_POST['useBackToTop']) ? true : false);
 $config->useGoTo = (isset($_POST['useGoTo']) ? true : false);
 $config->priority = (int) $_POST['priority'];
+$config->removeWhenNotUsed = (isset($_POST['removeWhenNotUsed']) ? true : false);
+$config->tocOnAllPages = (isset($_POST['tocOnAllPages']) ? true : false);
 
 $settings[] = $config;
 
 $config = new stdClass();
 
 if (isset($_POST['parseAnyArchive'])) {
-	$_POST['parseCategory'] = '1';
-	$_POST['parseDate'] = '1';
+    $_POST['parseCategory'] = '1';
+    $_POST['parseDate'] = '1';
 }
 
 $config->parsePage = (isset($_POST['parsePost']) ? true : false);
