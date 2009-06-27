@@ -39,7 +39,7 @@ First version of the plugin.
 
 == Installation ==
 
-1. Upload folder `tinytoc` to your `/wp-content/plugins` directory
+1. Upload folder `tiny-table-of-contents-tinytoc` to your `/wp-content/plugins` directory
 2. Activate the plugin through the `Plugins` menu in WordPress
 
 == Frequently Asked Questions ==
