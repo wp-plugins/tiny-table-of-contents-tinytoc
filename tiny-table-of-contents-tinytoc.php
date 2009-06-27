@@ -181,7 +181,7 @@ endfor;
     fwrite($file, $content);
     fclose($file);
 
-    $plugin_array['tinyPlugin'] = plugins_url('tinytoc/js/tinyPlugin.js');
+    $plugin_array['tinyPlugin'] = plugins_url('tiny-table-of-contents-tinytoc/js/tinyPlugin.js');
 
     return $plugin_array;
 
@@ -195,11 +195,23 @@ endfor;
 function hookMenus()
 {	
 	//Menu.
-    add_menu_page('TinyTOC Sumary', 'TinyTOC', 8, 'tinytoc/home.php');
-    
+    add_menu_page('TinyTOC Sumary', 'TinyTOC', 8, 'tiny-table-of-contents-tinytoc/home.php');
+
     //Submenus.
-    add_submenu_page('tinytoc/home.php', 'TinyTOC Summary', 'Summary', 8, 'tinytoc/home.php');
-    add_submenu_page('tinytoc/home.php', 'TinyTOC Settings', 'Settings', 8, 'tinytoc/settings.php');
+    add_submenu_page(
+		'tiny-table-of-contents-tinytoc/home.php', 
+		'TinyTOC Summary', 
+		'Summary', 
+		8, 
+		'tiny-table-of-contents-tinytoc/home.php'
+	);
+    add_submenu_page(
+		'tiny-table-of-contents-tinytoc/home.php', 
+		'TinyTOC Settings', 
+		'Settings', 
+		8, 
+		'tiny-table-of-contents-tinytoc/settings.php'
+	);
     
     $options = array(
         'tinytoc_settings_enabled',
