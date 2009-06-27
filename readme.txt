@@ -14,12 +14,12 @@ it will not parse. It's very simple to use from your editor
 so you do not have to manualy enter tags. Now it's nothing special, but later it will have much more features including
 some predefined styles and more styling control.
 
-`TODO`
+TODO
 
 * Add custom TOC position
 * Add custom text before TOC
 
-`Changelog`
+Changelog
 
 Ver 0.7 (released 2009-06-27)
 -------------------------------------------------------------------
