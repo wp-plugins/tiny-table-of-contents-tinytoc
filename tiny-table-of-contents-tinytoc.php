@@ -364,7 +364,7 @@ function startContentParsing($data)
     }
     
     //Cleanup
-	for ($i = 1; $i < $lev; $i++) {
+	for ($m = 1; $m < $lastLevel; $m++) {
 	    $toc .= $config->tinytoc_settings_tocstyle->endList;
 		$toc .= $config->tinytoc_settings_general->endItem;
 	}
