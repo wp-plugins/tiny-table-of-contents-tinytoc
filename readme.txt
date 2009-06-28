@@ -40,7 +40,7 @@ First version of the plugin.
 == Frequently Asked Questions ==
 
 = Now do I use this plugin? =
-When you go to your post editor you will see drop down menu "TOC Levels". Select you chapter and then chose one of the levels. Or you can manualy wrap your chapter in [tinytoc level="ln"]cont[/tinytoc] tags where `ln` is your level (number) and `cont` is you chapter.
+When you go to your post editor you will see drop down menu "TOC Levels". Select you chapter and then chose one of the levels. Or you can manualy wrap your chapter in [tinytoc level="lv"]cont[/tinytoc] tags where `lv` is your level (number) and `cont` is you chapter.
 
 = How to use image as "Back to top" button? =
 You can add image values to image field and in text create place holder by placing `%image%` or you cand add `<img />` tag to your text.
