@@ -30,8 +30,6 @@ some predefined styles and more styling control.
 -------------------------------------------------------------------
 * Plugin first version
 
-First version of the plugin.
-
 == Installation ==
 
 1. Upload folder `tiny-table-of-contents-tinytoc` to your `/wp-content/plugins` directory
