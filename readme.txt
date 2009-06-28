@@ -52,7 +52,7 @@ Currently you can not, but it will be avilable in next version.
 No, you can not, but it will also be avilable in next version.
 
 = How do you know what each of these fields mean? =
-Go to [english documentation](http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/#Documentation-1) or [Croatian documentation](http://hr.php4every1.com/skripte/tiny-table-of-contents-wordpress-plugin/#Dokumentacija-1).
+Go to [English documentation](http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/#Documentation-1) or [Croatian documentation](http://hr.php4every1.com/skripte/tiny-table-of-contents-wordpress-plugin/#Dokumentacija-1).
 
 == Screenshots ==
 
