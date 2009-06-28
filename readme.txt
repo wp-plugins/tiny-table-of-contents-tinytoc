@@ -1,6 +1,6 @@
 === Tiny Table Of Contents - TinyTOC ===
 Contributors: zlikavac32
-Tags: content, table, tiny, tinytoc, toc, bookmark
+Tags: content, table, tiny, tinytoc, toc, bookmark, simple, easy
 Requires at least: 2.0.2
 Tested up to: 2.7
 Stable tag: 0.7
@@ -26,7 +26,7 @@ some predefined styles and more styling control.
 * Added "Remove when not used" feature
 * Added "TOC on all pages" feature
 
-=Ver 0.3 (released 2009-05-21)=
+= Ver 0.3 (released 2009-05-21) =
 -------------------------------------------------------------------
 * Plugin first version
 
@@ -68,3 +68,15 @@ Go to [english documentation](http://php4every1.com/scripts/tiny-table-of-conten
 * Custom TOC position
 * Custom text before TOC
 * Custom styling for each level
+* Custom TOC tag (so you dont have to use `[tinytoc lev="lv"]cont[/tinytoc]`)
+
+== Source SVN ==
+
+* svn checkout http://svn.wp-plugins.org/tiny-table-of-contents-tinytoc/trunk/ tiny-table-of-contents-tinytoc
+
+== Support ==
+
+* Twitter: http://www.twitter.com/php4every1
+* Facebook: http://www.new.facebook.com/profile.php?id=1296304925&ref=mf
+* Plugin home: http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/
+* Documentation: http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/#Documentation-1
