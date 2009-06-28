@@ -14,14 +14,9 @@ it will not parse. It's very simple to use from your editor
 so you do not have to manualy enter tags. Now it's nothing special, but later it will have much more features including
 some predefined styles and more styling control.
 
-TODO
+== Changelog ==
 
-* Add custom TOC position
-* Add custom text before TOC
-
-Changelog
-
-Ver 0.7 (released 2009-06-27)
+= Ver 0.7 (released 2009-06-27) =
 -------------------------------------------------------------------
 * Fixed problem when parsing home page (<!--more--> tag)
 * Fixed some small parsing bugs
@@ -31,7 +26,7 @@ Ver 0.7 (released 2009-06-27)
 * Added "Remove when not used" feature
 * Added "TOC on all pages" feature
 
-Ver 0.3 (released 2009-05-21)
+=Ver 0.3 (released 2009-05-21)=
 -------------------------------------------------------------------
 * Plugin first version
 
@@ -44,25 +39,20 @@ First version of the plugin.
 
 == Frequently Asked Questions ==
 
-Q: Now do I use this plugin?
-A: When you go to your post editor you will see drop down menu "TOC Levels".
-Select you chapter and then chose one of the levels. Or you can manualy wrap your
-chapter in [tinytoc level="ln"]cont[/tinytoc] tags where ln is your level (number)
-and cont is you chapter.
+= Now do I use this plugin? =
+When you go to your post editor you will see drop down menu "TOC Levels". Select you chapter and then chose one of the levels. Or you can manualy wrap your chapter in [tinytoc level="ln"]cont[/tinytoc] tags where `ln` is your level (number) and `cont` is you chapter.
 
-Q: How to use image as "Back to top" button?
-A: You can add image values to image field and in text create place holder by placing "%image%"
-or you cand add <img /> tag to your text.
+= How to use image as "Back to top" button? =
+You can add image values to image field and in text create place holder by placing `%image%` or you cand add `<img />` tag to your text.
 
-Q: Can I add text before TOC?
-A: Currently you can not, but it will be avilable in next version.
+= Can I add text before TOC? =
+Currently you can not, but it will be avilable in next version.
 
-Q: Can I chose TOC position?
-A: No, you can not, but it will also be avilable in next version.
+= Can I chose TOC position? =
+No, you can not, but it will also be avilable in next version.
 
-Q: How do you know what each of these fields mean?
-A: Go to http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/#Documentation-1 or if you want documentation 
-on Croatian go to http://hr.php4every1.com/skripte/tiny-table-of-contents-wordpress-plugin/#Dokumentacija-1 .
+= How do you know what each of these fields mean? =
+Go to [english documentation](http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/#Documentation-1) or [Croatian documentation](http://hr.php4every1.com/skripte/tiny-table-of-contents-wordpress-plugin/#Dokumentacija-1).
 
 == Screenshots ==
 
@@ -72,6 +62,9 @@ on Croatian go to http://hr.php4every1.com/skripte/tiny-table-of-contents-wordpr
 4. An other part of `Plugin settings` page
 5. Also a part of `Plugin settings` page
 
-== Arbitrary section ==
 
-Visit page for more informations.
+== Planned Features ==
+
+* Custom TOC position
+* Custom text before TOC
+* Custom styling for each level

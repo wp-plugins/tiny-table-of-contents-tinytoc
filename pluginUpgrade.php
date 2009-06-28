@@ -119,7 +119,7 @@ $config = new stdClass();
 
 $config->name = 'Tiny Table Of Content - TinyTOC';
 $config->version = '0.7';
-$config->home = 'http://www.php4every1.com';
+$config->home = 'http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/';
 $config->author = 'Marijan Šuflaj';
 $config->email = 'msufflaj32@gmail.com';
 $config->authorHome = 'http://www.php4every1.com';
