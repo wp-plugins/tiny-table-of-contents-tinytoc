@@ -8,19 +8,7 @@
 if (!defined('IN_PLUGIN'))
     die('You can not access this file directly.');
 ?>
-<script type="text/javascript">
-<!--
-function incDecLevelNum(inc)
-{
-    var current = jQuery('input[name=maxLevelNum]').val() * 1;
-    if (current > 1 || inc === true) {
-	    var next = (inc === true) ? (current + 1) : (current - 1);
-	    jQuery('input[name=maxLevelNum]').val(next);
-	    jQuery('#maxLevelNum').text(next);
-	}
-}
-//-->
-</script>
+<script type="text/javascript" src="<?php echo get_bloginfo('home'); ?>/wp-content/plugins/tiny-table-of-contents-tinytoc/js/admin.js"></script>
 <div class="wrap">
     <h3>Plugin settings</h3>
     
@@ -39,7 +27,7 @@ function incDecLevelNum(inc)
 	    <table class="widefat" style="width: 500px">
 	        <thead>
 	            <tr>
-	                <th width="50%">
+	                <th width="49%">
 	                    Option
 	                </th>
 	                <th>
@@ -110,12 +98,64 @@ function incDecLevelNum(inc)
                 </tr>
 	        </tbody>
 	    </table>
+        
+        <h4>Style chapter level headings</h4>
+        
+        <table class="widefat" style="width: 500px">
+            <thead>
+                <tr>
+                    <th width="49%">
+                        Option
+                    </th>
+                    <th>
+                        Value
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="chapterLevelStyleBody">
+                <tr>
+                    <td>
+                        Use chapter level styling:
+                    </td>
+                    <td>
+                        <input type="checkbox" onclick="hideUnhide(this);" name="useChapterLevelStyling" <?php checked('1', $config->tinytoc_chapter_styling->useChapterLevelStyling); ?> />
+                    </td>
+                </tr>
+                <tr class="alternate">
+                    <td>
+                        Strip existing tags:
+                    </td>
+                    <td>
+                        <input type="checkbox" name="stripExistingTags" <?php checked('1', $config->tinytoc_chapter_styling->stripExistingTags); ?> />
+                    </td>
+                </tr>
+                <?php for ($i = 1; $i <= $config->tinytoc_settings_general->maxLevelNum; $i++) : ?>
+                <tr class="hideChapter" <?php if (!$config->tinytoc_chapter_styling->useChapterLevelStyling) : ?>style="display:none;"<?php endif; ?>>
+                    <td>
+                        Level <?php echo $i; ?> start:
+                    </td>
+                    <td>
+                        <textarea name="levelStyleStart[<?php echo $i; ?>]" cols="27" rows="3" ><?php echo htmlentities($config->tinytoc_chapter_styling->levelStyleStart[$i]); ?></textarea>
+                    </td>
+                </tr>
+                <tr class="alternate hideChapter" <?php if (!$config->tinytoc_chapter_styling->useChapterLevelStyling) : ?>style="display:none;"<?php endif; ?>>
+                    <td>
+                        Level <?php echo $i; ?> end:
+                    </td>
+                    <td>
+                        <textarea name="levelStyleEnd[<?php echo $i; ?>]" cols="27" rows="3" ><?php echo htmlentities($config->tinytoc_chapter_styling->levelStyleEnd[$i]); ?></textarea>
+                    </td>
+                </tr>
+                <?php endfor; ?>
+            </tbody>
+        </table>
 	    
 	    <h4>Header</h4>
+        
 	    <table class="widefat" style="width: 500px">
 	        <thead>
 	            <tr>
-	                <th width="50%">
+	                <th width="49%">
 	                    Option
 	                </th>
 	                <th>
@@ -129,7 +169,7 @@ function incDecLevelNum(inc)
 	                    Title:
 	                </td>
 	                <td>
-	                     <input type="text" name="headerTitle" value="<?php echo $config->tinytoc_settings_header->title; ?>" />
+	                     <input type="text" name="headerTitle" style="width: 235px;" value="<?php echo $config->tinytoc_settings_header->title; ?>" />
 	                </td>
 	            </tr>
 	            <tr class="alternate">
@@ -163,7 +203,7 @@ function incDecLevelNum(inc)
 	    <table class="widefat" style="width: 500px">
 	        <thead>
 	            <tr>
-	                <th width="50%">
+	                <th width="49%">
 	                    Option
 	                </th>
 	                <th>
@@ -174,21 +214,13 @@ function incDecLevelNum(inc)
 	        <tbody>
 	            <tr>
 	                <td>
-	                    Image:
+	                    Html:
 	                </td>
 	                <td>
-	                    <textarea name="backToTopImage" cols="27" rows="3" ><?php echo $config->tinytoc_settings_backtotop->image; ?></textarea>
+	                    <textarea name="backToTopHtml" cols="27" rows="3" ><?php echo htmlentities($config->tinytoc_settings_backtotop->html); ?></textarea>
 	                </td>
 	            </tr>
 	            <tr class="alternate">
-	                <td>
-	                    Text:
-	                </td>
-	                <td>
-	                    <textarea name="backToTopText" cols="27" rows="3" ><?php echo htmlentities($config->tinytoc_settings_backtotop->text); ?></textarea>
-	                </td>
-	            </tr>
-	            <tr>
 	                <td>
 	                    Css:
 	                </td>
@@ -200,12 +232,11 @@ function incDecLevelNum(inc)
 	    </table>
 	    
 	    <h4>Table of contents style</h4>
-	    <h5>Presets</h5>
 	    
 	    <table class="widefat" style="width: 500px">
 	        <thead>
 	            <tr>
-	                <th width="50%">
+	                <th width="49%">
 	                    Option
 	                </th>
 	                <th>
@@ -258,10 +289,11 @@ function incDecLevelNum(inc)
 	    </table>
 	    
 	    <h4>Display on</h4>
+        
 	    <table class="widefat" style="width: 500px">
 	        <thead>
 	            <tr>
-	                <th width="50%">
+	                <th width="49%">
 	                    Option
 	                </th>
 	                <th>
@@ -340,14 +372,12 @@ function incDecLevelNum(inc)
 	                </td>
 	                <td>
 	                    <select multiple="multiple" name="excludePages[]" size="5" style="width: 250px; height: 70px;">
-		                    <?php
+                            <?php
 		                    $pages = get_pages('');
-		                    foreach ($pages as $page) {
-		                    ?>
+		                    foreach ($pages as $page) :
+                            ?>
 	                        <option value="<?php echo $page->ID; ?>" <?php echo (in_array($page->ID, $config->tinytoc_settings_parse->pageExclude)) ? 'selected="selected"' : ''; ?>><?php echo $page->post_title ?></option>
-		                    <?php    
-		                    }
-		                    ?>
+		                    <?php endforeach; ?>
 	                    </select>
 	                </td>
 	            </tr>
@@ -359,12 +389,10 @@ function incDecLevelNum(inc)
 	                    <select multiple="multiple" name="excludePosts[]" size="5" style="width: 250px; height: 70px;">
                             <?php
                             $posts = get_posts('numberposts=-1&orderby=title');
-                            foreach ($posts as $post) {
+                            foreach ($posts as $post) :
                             ?>
                             <option value="<?php echo $post->ID; ?>" <?php echo (in_array($post->ID, $config->tinytoc_settings_parse->postExclude)) ? 'selected="selected"' : ''; ?>><?php echo $post->post_title ?></option>
-                            <?php    
-                            }
-                            ?>
+                            <?php endforeach; ?>
                         </select>
 	                </td>
 	            </tr>

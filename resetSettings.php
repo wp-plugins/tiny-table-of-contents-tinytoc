@@ -15,7 +15,8 @@ $keys = array(
     'tinytoc_settings_general',
     'tinytoc_settings_parse',
     'tinytoc_settings_backtotop',
-    'tinytoc_settings_tocstyle'
+    'tinytoc_settings_tocstyle',
+    'tinytoc_chapter_styling'
 );
 
 $settings = array();
@@ -69,11 +70,18 @@ $settings[] = $config;
 
 $config = new stdClass();
 
-$config->startList = '<ul>';
-$config->endList = '</ul>';
-$config->startItem = '<li>';
-$config->endItem = '</li>';
-$config->css = '';
+$config->useChapterLevelStyling = false;
+$config->stripExistingTags = false;
+$config->levelStyleStart = array(
+    1   => '',
+    2   => '',
+    3   => ''
+);
+$config->levelStyleEnd = array(
+    1   => '',
+    2   => '',
+    3   => ''
+);
 
 $settings[] = $config;
 

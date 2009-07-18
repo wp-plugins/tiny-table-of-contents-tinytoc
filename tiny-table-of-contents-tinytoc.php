@@ -8,7 +8,7 @@
     Plugin Name: Tiny Table Of Content - TinyTOC
     Plugin URI: http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/
     Description: Advanced plugin for dynamic creation of "Table of content" for you post or pages.
-    Version: 0.7
+    Version: 0.7.18
     Author: Marijan Šuflaj
     Author URI: http://www.php4every1.com
 */
@@ -35,7 +35,7 @@
 define('IN_PLUGIN', true);
 
 //Current version.
-define('CURR_VER', '0.7');
+define('CURR_VER', '0.7.18');
 
 //Load config class.
 require_once 'classes/config.php';
@@ -220,6 +220,7 @@ function hookMenus()
         'tinytoc_settings_parse',
         'tinytoc_settings_backtotop',
         'tinytoc_settings_tocstyle',
+        'tinytoc_chapter_styling',
         'tinytoc_settings_info'
     );
 
@@ -287,7 +288,7 @@ function startContentParsing($data)
 		    $allContent[$i] = preg_replace_callback(
 			    '/\[tinytoc[[:space:]]+level="([0-9]+)"\]([\S\s]*?)\[\/tinytoc\]/i',
                 'callbackReplace',
-			    $allContent[$i]
+			    ((($i + 1) === $currentPage) ? $data : $allContent[$i])
 			);
 			
 			//Loop each match.
@@ -324,7 +325,6 @@ function startContentParsing($data)
 	
 	//Loop each match and create url for them.
     for ($i = 0; $i < $count; $i++) {
-	    $lev = 1;
         $currLevel = (int) $urlStuff[1][$i];
         if ($currLevel > $lastLevel) {
             for ($m = $currLevel - 1; $m > $lastLevel; $m--) {
@@ -375,12 +375,13 @@ function startContentParsing($data)
         $currentPage === 1 
         && ($pos = strpos($allContent[0], '<!--more-->')) !== false
         && strpos($data, '<!--more-->') === false
+        && is_preview() === false
     ) {
     	return $toc . substr($allContent[0], 0, $pos);
     }
     
     return ((!$config->tinytoc_settings_general->tocOnAllPages && $currentPage > 1 ) ? '' : $toc )
-        . nl2br($allContent[$currentPage - 1]);
+        . $allContent[$currentPage - 1];
 }
 
 /**
@@ -396,20 +397,38 @@ function createGoToUrl($page, $currPage, $level, $title)
 {
     global $post;
     
-    $title = htmlentities(strip_tags($title));
+    $config = tinyConfig::getInstance()->get('tinytoc_chapter_styling');
+    
+    $return = '';
+    
+    if ($config->tinytoc_chapter_styling->useChapterLevelStyling) {
+        if ($config->tinytoc_chapter_styling->stripExistingTags)
+            $title = htmlentities(strip_tags($title));
+            
+        if (isset($config->tinytoc_chapter_styling->levelStyleStart[$level])) {
+            $return .= $config->tinytoc_chapter_styling->levelStyleStart[$level];
+        }
+    }
     
     //If enabled GoTo feature, this will create urls for them.
-    $return = '<a href="';
+    $return .= '<a href="';
     $return .= (($page !== $currPage) ? 
            (('' == get_option('permalink_structure') || 
                in_array($post->post_status, array('draft', 'pending'))
-           ) ?  (get_permalink() . '&amp;page=' . $page) : 
+           ) ?  (get_permalink() . '&page=' . $page) : 
            (trailingslashit(get_permalink()) . user_trailingslashit($page, 'single_paged'))) : '') 
        . '#' . str_replace(
             array(' ', '.'), 
             '-', 
-            $title
+            htmlentities(strip_tags($title))
         ) . '-' . $level . '">' . $title . '</a>';
+     
+    if (
+        $config->tinytoc_chapter_styling->useChapterLevelStyling 
+        &&isset($config->tinytoc_chapter_styling->levelStyleEnd[$level])
+    ) {
+        $return .= $config->tinytoc_chapter_styling->levelStyleEnd[$level];
+    }
         
     return $return;
 }

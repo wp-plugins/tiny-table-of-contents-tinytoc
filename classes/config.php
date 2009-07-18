@@ -119,7 +119,7 @@ class tinyConfig
 	 */
 	private function _stripSlashes($input)
 	{
-		if (is_array($input) || is_object($input)) {
+		if (is_object($input)) {
 			foreach ($input as $k => $v) {
 				if (is_array($v) || is_object($v)) {
 					$input->$k = $this->_stripSlashes($v);
@@ -129,6 +129,17 @@ class tinyConfig
 				}
 			}
 			return $input;
+		}
+		elseif (is_array($input)) {
+            foreach ($input as $k => $v) {
+                if (is_array($v) || is_object($v)) {
+                    $input[$k] = $this->_stripSlashes($v);
+                }
+                else {
+                    $input[$k] = stripslashes($v);
+                }
+            }
+            return $input;
 		}
 		else {
 			return stripslashes($input);

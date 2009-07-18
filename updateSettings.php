@@ -15,7 +15,8 @@ $keys = array(
     'tinytoc_settings_general',
     'tinytoc_settings_parse',
     'tinytoc_settings_backtotop',
-    'tinytoc_settings_tocstyle'
+    'tinytoc_settings_tocstyle',
+    'tinytoc_chapter_styling'
 );
 
 $settings = array();
@@ -63,8 +64,7 @@ $settings[] = $config;
 
 $config = new stdClass();
 
-$config->image = (string) $_POST['backToTopImage'];
-$config->text = (string) $_POST['backToTopText'];
+$config->html = (string) $_POST['backToTopHtml'];
 $config->css = (string) $_POST['backToTopCss'];
 
 $settings[] = $config;
@@ -76,6 +76,15 @@ $config->endList = (string) $_POST['tocEndList'];
 $config->startItem = (string) $_POST['tocStartItem'];
 $config->endItem = (string) $_POST['tocEndItem'];
 $config->css = (string) $_POST['tocCss'];
+
+$settings[] = $config;
+
+$config = new stdClass();
+
+$config->useChapterLevelStyling = (isset($_POST['useChapterLevelStyling']) ? true : false);
+$config->stripExistingTags = (isset($_POST['stripExistingTags']) ? true : false);
+$config->levelStyleStart = $_POST['levelStyleStart'];
+$config->levelStyleEnd = $_POST['levelStyleEnd'];
 
 $settings[] = $config;
 

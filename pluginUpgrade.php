@@ -16,11 +16,13 @@ $keys = array(
     'tinytoc_settings_parse',
     'tinytoc_settings_backtotop',
     'tinytoc_settings_tocstyle',
+    'tinytoc_chapter_styling',
     'tinytoc_settings_info'
 );
 
 $autoload = array(
     'yes',
+    'no',
     'no',
     'no',
     'no',
@@ -91,9 +93,7 @@ $settings[] = $config;
 
 $config = new stdClass();
 
-$config->image = isset($config->tinytoc_settings_backtotop->image) ? 
-    $config->tinytoc_settings_backtotop->image : '';
-$config->text = isset($config->tinytoc_settings_backtotop->text) ? 
+$config->html = isset($config->tinytoc_settings_backtotop->html) ? 
     $config->tinytoc_settings_backtotop->text : ' <small><a href="#tinyTOC">Top</a></small>';
 $config->css = isset($config->tinytoc_settings_backtotop->css) ? 
     $config->tinytoc_settings_backtotop->css : '';
@@ -117,8 +117,29 @@ $settings[] = $config;
 
 $config = new stdClass();
 
+$config->useChapterLevelStyling = isset($config->tinytoc_chapter_styling->useChapterLevelStyling) ? 
+    $config->tinytoc_settings_tocstyle->startList : false;
+$config->stripExistingTags = isset($config->tinytoc_chapter_styling->stripExistingTags) ? 
+    $config->tinytoc_settings_tocstyle->endList : false;
+$config->levelStyleStart = isset($config->tinytoc_chapter_styling->levelStyleStart) ? 
+    $config->tinytoc_settings_tocstyle->startItem : array(
+        1   => '',
+        2   => '',
+        3   => ''
+    );
+$config->levelStyleEnd = isset($config->tinytoc_chapter_styling->levelStyleEnd) ? 
+    $config->tinytoc_settings_tocstyle->endItem : array(
+        1   => '',
+        2   => '',
+        3   => ''
+    );
+
+$settings[] = $config;
+
+$config = new stdClass();
+
 $config->name = 'Tiny Table Of Content - TinyTOC';
-$config->version = '0.7';
+$config->version = '0.7.18';
 $config->home = 'http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/';
 $config->author = 'Marijan Šuflaj';
 $config->email = 'msufflaj32@gmail.com';

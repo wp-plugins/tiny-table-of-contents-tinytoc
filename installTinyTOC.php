@@ -16,6 +16,7 @@ $keys = array(
     'tinytoc_settings_parse',
     'tinytoc_settings_backtotop',
     'tinytoc_settings_tocstyle',
+    'tinytoc_chapter_styling',
     'tinytoc_settings_info'
 );
 
@@ -26,6 +27,7 @@ $autoload = array(
 	'no',
 	'no',
 	'no',
+    'no',
 	'no'
 );
 
@@ -74,8 +76,7 @@ $settings[] = $config;
 
 $config = new stdClass();
 
-$config->image = '';
-$config->text = ' <small><a href="#tinyTOC">Top</a></small>';
+$config->html = ' <small><a href="#tinyTOC">Top</a></small>';
 $config->css = '';
 
 $settings[] = $config;
@@ -92,8 +93,25 @@ $settings[] = $config;
 
 $config = new stdClass();
 
+$config->useChapterLevelStyling = false;
+$config->stripExistingTags = false;
+$config->levelStyleStart = array(
+    1   => '',
+    2   => '',
+    3   => ''
+);
+$config->levelStyleEnd = array(
+    1   => '',
+    2   => '',
+    3   => ''
+);
+
+$settings[] = $config;
+
+$config = new stdClass();
+
 $config->name = 'Tiny Table Of Content - TinyTOC';
-$config->version = '0.3';
+$config->version = '0.7.18';
 $config->home = 'http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/';
 $config->author = 'Marijan Šuflaj';
 $config->email = 'msufflaj32@gmail.com';
