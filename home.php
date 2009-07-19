@@ -17,7 +17,7 @@ $config = tinyConfig::getInstance()->get('');
     <table class="widefat" style="width: 500px">
         <tbody>
             <tr>
-                <td width="50%">
+                <td width="49%">
                     Name:
                 </td>
                 <td>
@@ -50,12 +50,64 @@ $config = tinyConfig::getInstance()->get('');
             </tr>
         </tbody>
     </table>
+        
+        <h4>Style chapter level headings</h4>
+        
+        <table class="widefat" style="width: 500px">
+            <thead>
+                <tr>
+                    <th width="49%">
+                        Option
+                    </th>
+                    <th>
+                        Value
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="chapterLevelStyleBody">
+                <tr>
+                    <td>
+                        Use chapter level styling:
+                    </td>
+                    <td>
+                        <?php echo ((bool) $config->tinytoc_chapter_styling->useChapterLevelStyling === true) ? 'true' : 'false'; ?>
+                    </td>
+                </tr>
+                <tr class="alternate">
+                    <td>
+                        Strip existing tags:
+                    </td>
+                    <td>
+                        <?php echo ((bool) $config->tinytoc_chapter_styling->stripExistingTags === true) ? 'true' : 'false'; ?>
+                    </td>
+                </tr>
+                <?php for ($i = 1; $i <= $config->tinytoc_settings_general->maxLevelNum; $i++) : ?>
+                <tr>
+                    <td>
+                        Level <?php echo $i; ?> start:
+                    </td>
+                    <td>
+                        <?php echo isset($config->tinytoc_chapter_styling->levelStyleStart[$i]) ? htmlentities($config->tinytoc_chapter_styling->levelStyleStart[$i]) : ''; ?>
+                    </td>
+                </tr>
+                <tr class="alternate">
+                    <td>
+                        Level <?php echo $i; ?> end:
+                    </td>
+                    <td>
+                       <?php echo isset($config->tinytoc_chapter_styling->levelStyleEnd[$i]) ? htmlentities($config->tinytoc_chapter_styling->levelStyleEnd[$i]) : ''; ?>
+                    </td>
+                </tr>
+                <?php endfor; ?>
+            </tbody>
+        </table>
+        
+        <h4>General</h4>
     
-    <h4>General</h4>
     <table class="widefat" style="width: 500px">
         <thead>
             <tr>
-                <th width="50%">
+                <th width="49%">
                     Option
                 </th>
                 <th>
@@ -127,7 +179,7 @@ $config = tinyConfig::getInstance()->get('');
     <table class="widefat" style="width: 500px">
         <thead>
             <tr>
-                <th width="50%">
+                <th width="49%">
                     Option
                 </th>
                 <th>
@@ -175,7 +227,7 @@ $config = tinyConfig::getInstance()->get('');
     <table class="widefat" style="width: 500px">
         <thead>
             <tr>
-                <th width="50%">
+                <th width="49%">
                     Option
                 </th>
                 <th>
@@ -215,7 +267,7 @@ $config = tinyConfig::getInstance()->get('');
     <table class="widefat" style="width: 500px">
         <thead>
             <tr>
-                <th width="50%">
+                <th width="49%">
                     Option
                 </th>
                 <th>
@@ -271,7 +323,7 @@ $config = tinyConfig::getInstance()->get('');
     <table class="widefat" style="width: 500px">
         <thead>
             <tr>
-                <th width="50%">
+                <th width="49%">
                     Option
                 </th>
                 <th>
