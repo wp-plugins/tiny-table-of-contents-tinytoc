@@ -81,6 +81,7 @@ $config = tinyConfig::getInstance()->get('');
                         <?php echo ((bool) $config->tinytoc_chapter_styling->stripExistingTags === true) ? 'true' : 'false'; ?>
                     </td>
                 </tr>
+                <?php if ((bool) $config->tinytoc_chapter_styling->useChapterLevelStyling === true) : ?>
                 <?php for ($i = 1; $i <= $config->tinytoc_settings_general->maxLevelNum; $i++) : ?>
                 <tr>
                     <td>
@@ -99,6 +100,7 @@ $config = tinyConfig::getInstance()->get('');
                     </td>
                 </tr>
                 <?php endfor; ?>
+                <?php endif; ?>
             </tbody>
         </table>
         
