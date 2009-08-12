@@ -52,7 +52,7 @@ some predefined styles and more styling control.
 When you go to your post editor you will see drop down menu "TOC Levels". Select you chapter and then chose one of the levels. Or you can manualy wrap your chapter in [tinytoc level="lv"]cont[/tinytoc] tags where `lv` is your level (number) and `cont` is you chapter.
 
 = How to use image as "Back to top" button? =
-You can add image values to image field and in text create place holder by placing `%image%` or you cand add `<img />` tag to your text.
+You have to add `<img />` tag to your text with path to that image as `src` attribute value.
 
 = Can I add text before TOC? =
 Currently you can not, but it will be avilable in next versions.
