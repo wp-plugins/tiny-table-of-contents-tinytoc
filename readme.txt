@@ -61,7 +61,7 @@ Currently you can not, but it will be avilable in next versions.
 No, you can not, but it will also be avilable in next versions.
 
 = How can I remove `Header` and still be able to use `Back to top` feature? =
-In order to use `Backt to top` you need to have some tag with ID `tinyTOC`. Just add `style="display: none;"` to your `Html before title` field in tag. If you have default example `<h3 id="tyinTOC">` then you would have `<h3 id="tyinTOC" style="display: none;">`. That will remove Title before table of contents and still allow you to use `Back to top` feature.
+In order to use `Backt to top` you need to have some tag with some ID. Just add `style="display: none;"` to your `Html before title` field in tag. If you have default example `<h3 id="tyinTOC">` then you would have `<h3 id="tyinTOC" style="display: none;">`. That will remove Title before table of contents and still allow you to use `Back to top` feature.
 
 = How do you know what each of these fields mean? =
 Visit [ documentation](http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/#Documentation-1).
