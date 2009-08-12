@@ -55,13 +55,16 @@ When you go to your post editor you will see drop down menu "TOC Levels". Select
 You can add image values to image field and in text create place holder by placing `%image%` or you cand add `<img />` tag to your text.
 
 = Can I add text before TOC? =
-Currently you can not, but it will be avilable in next version.
+Currently you can not, but it will be avilable in next versions.
 
 = Can I chose TOC position? =
-No, you can not, but it will also be avilable in next version.
+No, you can not, but it will also be avilable in next versions.
+
+= How can I remove `Header` and still be able to use `Back to top` feature? =
+In order to use `Backt to top` you need to have some tag with ID `tinyTOC`. Just add `style="display: none;"` to your `Html before title` field in tag. If you have default example `<h3 id="tyinTOC">` then you would have `<h3 id="tyinTOC" style="display: none;">`. That will remove Title before table of contents and still allow you to use `Back to top` feature.
 
 = How do you know what each of these fields mean? =
-Go to [English documentation](http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/#Documentation-1) or [Croatian documentation](http://hr.php4every1.com/skripte/tiny-table-of-contents-wordpress-plugin/#Dokumentacija-1).
+Visit [ documentation](http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/#Documentation-1).
 
 == Screenshots ==
 
