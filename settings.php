@@ -11,17 +11,17 @@ if (!defined('IN_PLUGIN'))
 <script type="text/javascript" src="<?php echo get_bloginfo('home'); ?>/wp-content/plugins/tiny-table-of-contents-tinytoc/js/admin.js"></script>
 <div class="wrap">
     <h3>Plugin settings</h3>
-    
+
     <?php
     if (isset($_POST['update']))
         require_once 'updateSettings.php';
-        
+
     if (isset($_POST['default']))
         require_once 'resetSettings.php';
-        
+
     $config = tinyConfig::getInstance()->get('');
     ?>
-    
+
     <form method="post">
 	    <h4>General</h4>
 	    <table class="widefat" style="width: 500px">
@@ -98,9 +98,9 @@ if (!defined('IN_PLUGIN'))
                 </tr>
 	        </tbody>
 	    </table>
-        
+
         <h4>Style chapter level headings</h4>
-        
+
         <table class="widefat" style="width: 500px">
             <thead>
                 <tr>
@@ -149,9 +149,9 @@ if (!defined('IN_PLUGIN'))
                 <?php endfor; ?>
             </tbody>
         </table>
-	    
+
 	    <h4>Header</h4>
-        
+
 	    <table class="widefat" style="width: 500px">
 	        <thead>
 	            <tr>
@@ -198,7 +198,7 @@ if (!defined('IN_PLUGIN'))
 	            </tr>
 	        </tbody>
 	    </table>
-	    
+
 	    <h4>Back to top</h4>
 	    <table class="widefat" style="width: 500px">
 	        <thead>
@@ -230,9 +230,9 @@ if (!defined('IN_PLUGIN'))
 	            </tr>
 	        </tbody>
 	    </table>
-	    
+
 	    <h4>Table of contents style</h4>
-	    
+
 	    <table class="widefat" style="width: 500px">
 	        <thead>
 	            <tr>
@@ -287,9 +287,9 @@ if (!defined('IN_PLUGIN'))
 	            </tr>
 	        </tbody>
 	    </table>
-	    
+
 	    <h4>Display on</h4>
-        
+
 	    <table class="widefat" style="width: 500px">
 	        <thead>
 	            <tr>

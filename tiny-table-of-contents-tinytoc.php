@@ -8,12 +8,12 @@
     Plugin Name: Tiny Table Of Content - TinyTOC
     Plugin URI: http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/
     Description: Advanced plugin for dynamic creation of "Table of content" for you post or pages.
-    Version: 0.7.18
+    Version: 0.8.12
     Author: Marijan Šuflaj
     Author URI: http://www.php4every1.com
 */
 
-/*  
+/*
     Copyright 2009  Marijan Šuflaj  (email : msufflaj32@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
@@ -35,7 +35,7 @@
 define('IN_PLUGIN', true);
 
 //Current version.
-define('CURR_VER', '0.7.18');
+define('CURR_VER', '0.8.12');
 
 //Load config class.
 require_once 'classes/config.php';
@@ -64,8 +64,8 @@ add_action('wp_footer', 'echoStyleSheets');
 
 /**
  * Function create stylesheets.
- * 
- * @return 
+ *
+ * @return
  */
 function echoStyleSheets()
 {
@@ -76,7 +76,7 @@ function echoStyleSheets()
     );
 
     $config = tinyConfig::getInstance()->get($options);
-    
+
 ?>
 <!-- TinyTOC Stylesheets -->
 <style type="text/css">
@@ -95,7 +95,7 @@ function echoStyleSheets()
 
 /**
  * Init function
- * 
+ *
  * @return
  */
 function tinyTocAddButtons() {
@@ -129,11 +129,11 @@ function tinyTocRegisterButton($buttons) {
  * @return array Plugins that need to be registered
  */
 function tinyTocAddPlugin($plugin_array) {
-	
+
 	//Start output buffering.
 	ob_start();
-	
-?> 
+
+?>
 (function()  {
    // Create a new plugin class
    tinymce.create('tinymce.plugins.ExamplePlugin', {
@@ -156,25 +156,25 @@ $num = $config->tinytoc_settings_general->maxLevelNum + 1;
 for ($i = 1; $i < $num; $i++) :
 ?>
                 mlb.add('Level <?php echo $i; ?>', '<?php echo $i; ?>');
-<?php 
+<?php
 endfor;
 ?>
 
 		        // Return the new listbox instance
 		        return mlb;
 	        }
-	
+
 	        return null;
 	    }
 
     });
-    
+
     // Register plugin with a short name
     tinymce.PluginManager.add('tinyPlugin', tinymce.plugins.ExamplePlugin);
 })();
 
 <?php
-    
+
     //Stop output buffering and save content to file.
     $content = ob_get_clean();
     $file = fopen(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . 'tinyPlugin.js', 'w');
@@ -189,30 +189,30 @@ endfor;
 
 /*
  * Function that hooks menus to admin panel.
- * 
+ *
  * @return
  */
 function hookMenus()
-{	
+{
 	//Menu.
     add_menu_page('TinyTOC Sumary', 'TinyTOC', 8, 'tiny-table-of-contents-tinytoc/home.php');
 
     //Submenus.
     add_submenu_page(
-		'tiny-table-of-contents-tinytoc/home.php', 
-		'TinyTOC Summary', 
-		'Summary', 
-		8, 
+		'tiny-table-of-contents-tinytoc/home.php',
+		'TinyTOC Summary',
+		'Summary',
+		8,
 		'tiny-table-of-contents-tinytoc/home.php'
 	);
     add_submenu_page(
-		'tiny-table-of-contents-tinytoc/home.php', 
-		'TinyTOC Settings', 
-		'Settings', 
-		8, 
+		'tiny-table-of-contents-tinytoc/home.php',
+		'TinyTOC Settings',
+		'Settings',
+		8,
 		'tiny-table-of-contents-tinytoc/settings.php'
 	);
-    
+
     $options = array(
         'tinytoc_settings_enabled',
         'tinytoc_settings_header',
@@ -229,8 +229,8 @@ function hookMenus()
 
 $config = tinyConfig::getInstance()->get('tinytoc_settings_general');
 add_action(
-    'the_content', 
-    'startContentParsing', 
+    'the_content',
+    'startContentParsing',
     $config->tinytoc_settings_general->priority
 );
 
@@ -242,7 +242,7 @@ add_action(
  */
 function startContentParsing($data)
 {
-	
+
 	//Get config.
 	$config = tinyConfig::getInstance()->get(array(
 	    'tinytoc_settings_enabled',
@@ -250,47 +250,41 @@ function startContentParsing($data)
         'tinytoc_settings_general',
         'tinytoc_settings_tocstyle'
     ));
-    
+
     if ($config->tinytoc_settings_enabled !== '1')
         return $data;
-	
+
     //Get post.
 	global $post;
-	
+
 	//Split it by <!--nextpage-->.
 	$allContent = explode('<!--nextpage-->', $post->post_content);
 	//Number of pages.
 	$numPages = count($allContent);
-	
+
 	//Get current page of multipage post.
 	$currentPage = ((int) get_query_var('page') === 0) ? 1 : (int) get_query_var('page');
-	
+
 	//Check if we need to parse it.
 	if (!checkIfWeNeedToParse())
-	    return $config->tinytoc_settings_general->removeWhenNotUsed ? 
+	    return $config->tinytoc_settings_general->removeWhenNotUsed ?
 	       preg_replace('/\[tinytoc[[:space:]]+level="([0-9]+)"\]([\S\s]*?)\[\/tinytoc\]/i', '$2', $data) : $data;
-	
+
 	$urlStuffTemp = array();
 	$urlStuff = array();
-	
-	   
+
+
 	$match = false;
-	
+
 	//Loop all pages.
 	for ($i = 0; $i < $numPages; $i++) {
 		//Search for levels and celan them
 		if (preg_match_all(
-		        '/\[tinytoc[[:space:]]+level="([0-9]+)"\]([\S\s]*?)\[\/tinytoc\]/i', 
+		        '/\[tinytoc[[:space:]]+level="([0-9]+)"\]([\S\s]*?)\[\/tinytoc\]/i',
 		        $allContent[$i], $urlStuffTemp
 		    )) {
 		    $match = true;
-			
-		    $allContent[$i] = preg_replace_callback(
-			    '/\[tinytoc[[:space:]]+level="([0-9]+)"\]([\S\s]*?)\[\/tinytoc\]/i',
-                'callbackReplace',
-			    ((($i + 1) === $currentPage) ? $data : $allContent[$i])
-			);
-			
+
 			//Loop each match.
 			foreach ($urlStuffTemp as $k => $v) {
 				if ($k === 0) {
@@ -306,23 +300,30 @@ function startContentParsing($data)
 			}
 		}
 	}
-	
+
+
+
+    $data = preg_replace_callback(
+        '/\[tinytoc[[:space:]]+level="([0-9]+)"\]([\S\s]*?)\[\/tinytoc\]/i',
+        'callbackReplace',
+        $data);
+
 	//No match? Return data.
 	if (!$match)
 	   return $data;
-	
+
 	//Create toc.
 	$toc = $config->tinytoc_settings_header->before;
 	$toc .= $config->tinytoc_settings_header->title;
 	$toc .= $config->tinytoc_settings_header->after;
-	
+
 	$toc .= $config->tinytoc_settings_tocstyle->startList;
-	
-	
+
+
 	$count = count($urlStuff[1]);
-	
+
 	$lastLevel = 1;
-	
+
 	//Loop each match and create url for them.
     for ($i = 0; $i < $count; $i++) {
         $currLevel = (int) $urlStuff[1][$i];
@@ -334,8 +335,8 @@ function startContentParsing($data)
             //$toc .= $config->tinytoc_settings_tocstyle->startItem;
             $toc .= $config->tinytoc_settings_tocstyle->startList;
             $toc .= $config->tinytoc_settings_tocstyle->startItem;
-            $toc .= $config->tinytoc_settings_general->useGoTo ? 
-                createGoToUrl($urlStuff[0][$i], $currentPage, $urlStuff[1][$i],$urlStuff[2][$i]) : 
+            $toc .= $config->tinytoc_settings_general->useGoTo ?
+                createGoToUrl($urlStuff[0][$i], $currentPage, $urlStuff[1][$i],$urlStuff[2][$i]) :
                 $urlStuff[2][$i];
             //$toc .= $config->tinytoc_settings_general->endItem;
         }
@@ -348,40 +349,31 @@ function startContentParsing($data)
             $toc .= $config->tinytoc_settings_tocstyle->endList;
 			$toc .= $config->tinytoc_settings_general->endItem;
             $toc .= $config->tinytoc_settings_tocstyle->startItem;
-            $toc .= $config->tinytoc_settings_general->useGoTo ? 
-                createGoToUrl($urlStuff[0][$i], $currentPage, $urlStuff[1][$i],$urlStuff[2][$i]) : 
+            $toc .= $config->tinytoc_settings_general->useGoTo ?
+                createGoToUrl($urlStuff[0][$i], $currentPage, $urlStuff[1][$i],$urlStuff[2][$i]) :
                 $urlStuff[2][$i];
             $toc .= $config->tinytoc_settings_tocstyle->endItem;
         }
         else {
             $toc .= $config->tinytoc_settings_tocstyle->startItem;
-            $toc .= $config->tinytoc_settings_general->useGoTo ? 
-                createGoToUrl($urlStuff[0][$i], $currentPage, $urlStuff[1][$i],$urlStuff[2][$i]) : 
+            $toc .= $config->tinytoc_settings_general->useGoTo ?
+                createGoToUrl($urlStuff[0][$i], $currentPage, $urlStuff[1][$i],$urlStuff[2][$i]) :
                 $urlStuff[2][$i];
             //$toc .= $config->tinytoc_settings_tocstyle->endItem;
         }
         $lastLevel = $currLevel;
     }
-    
+
     //Cleanup
 	for ($m = 1; $m < $lastLevel; $m++) {
 	    $toc .= $config->tinytoc_settings_tocstyle->endList;
 		$toc .= $config->tinytoc_settings_general->endItem;
 	}
-    
+
     $toc .= $config->tinytoc_settings_tocstyle->endList;
-    
-    if (
-        $currentPage === 1 
-        && ($pos = strpos($allContent[0], '<!--more-->')) !== false
-        && strpos($data, '<!--more-->') === false
-        && is_preview() === false
-    ) {
-    	return $toc . substr($allContent[0], 0, $pos);
-    }
-    
+
     return ((!$config->tinytoc_settings_general->tocOnAllPages && $currentPage > 1 ) ? '' : $toc )
-        . $allContent[$currentPage - 1];
+        . $data;
 }
 
 /**
@@ -396,40 +388,20 @@ function startContentParsing($data)
 function createGoToUrl($page, $currPage, $level, $title)
 {
     global $post;
-    
-    $config = tinyConfig::getInstance()->get('tinytoc_chapter_styling');
-    
-    $return = '';
-    
-    if ($config->tinytoc_chapter_styling->useChapterLevelStyling) {
-        if ($config->tinytoc_chapter_styling->stripExistingTags)
-            $title = htmlentities(strip_tags($title));
-            
-        if (isset($config->tinytoc_chapter_styling->levelStyleStart[$level])) {
-            $return .= $config->tinytoc_chapter_styling->levelStyleStart[$level];
-        }
-    }
-    
+
     //If enabled GoTo feature, this will create urls for them.
-    $return .= '<a href="';
-    $return .= (($page !== $currPage) ? 
-           (('' == get_option('permalink_structure') || 
+    $return = '<a href="';
+    $return .= (($page !== $currPage) ?
+           (('' == get_option('permalink_structure') ||
                in_array($post->post_status, array('draft', 'pending'))
-           ) ?  (get_permalink() . '&page=' . $page) : 
-           (trailingslashit(get_permalink()) . user_trailingslashit($page, 'single_paged'))) : '') 
+           ) ?  (get_permalink() . '&page=' . $page) :
+           (trailingslashit(get_permalink()) . user_trailingslashit($page, 'single_paged'))) : '')
        . '#' . str_replace(
-            array(' ', '.'), 
-            '-', 
+            array(' ', '.'),
+            '-',
             htmlentities(strip_tags($title))
         ) . '-' . $level . '">' . $title . '</a>';
-     
-    if (
-        $config->tinytoc_chapter_styling->useChapterLevelStyling 
-        &&isset($config->tinytoc_chapter_styling->levelStyleEnd[$level])
-    ) {
-        $return .= $config->tinytoc_chapter_styling->levelStyleEnd[$level];
-    }
-        
+
     return $return;
 }
 
@@ -442,31 +414,51 @@ function createGoToUrl($page, $currPage, $level, $title)
 function callbackReplace($matches)
 {
 	$currentPage = ((int) get_query_var('page') === 0) ? 1 : (int) get_query_var('page');
-	
+
     //Get config
 	$config = tinyConfig::getInstance()->get(array(
         'tinytoc_settings_general',
-        'tinytoc_settings_backtotop'
+        'tinytoc_settings_backtotop',
+        'tinytoc_chapter_styling'
     ));
-    
+
     //Creates our replace.
-    $replace = $config->tinytoc_settings_general->useGoTo 
+    $replace = $config->tinytoc_settings_general->useGoTo
         ? '<span id="' . str_replace(
-            array(' ', '.'), 
-            '-', 
-            htmlentities($matches[2])
+            array(' ', '.'),
+            '-',
+            htmlentities(strip_tags($matches[2]))
         ) . '-' . $matches[1] . '">' : '';
+
+
+    if ($config->tinytoc_chapter_styling->useChapterLevelStyling) {
+        if ($config->tinytoc_chapter_styling->stripExistingTags)
+            $matches[2] = htmlentities(strip_tags($matches[2]));
+
+        if (isset($config->tinytoc_chapter_styling->levelStyleStart[$matches[1]])) {
+            $replace .= $config->tinytoc_chapter_styling->levelStyleStart[$matches[1]];
+        }
+    }
+
     $replace .= $matches[2];
+
+    if (
+        $config->tinytoc_chapter_styling->useChapterLevelStyling
+        && isset($config->tinytoc_chapter_styling->levelStyleEnd[$matches[1]])
+    ) {
+        $replace .= $config->tinytoc_chapter_styling->levelStyleEnd[$matches[1]];
+    }
+
     $replace .= $config->tinytoc_settings_general->useGoTo ? '</span>' : '';
-    $replace .= ($config->tinytoc_settings_general->useBackToTop 
-        && ($config->tinytoc_settings_general->tocOnAllPages || 
-        (!$config->tinytoc_settings_general->tocOnAllPages && $currentPage === 1))) ? 
+    $replace .= ($config->tinytoc_settings_general->useBackToTop
+        && ($config->tinytoc_settings_general->tocOnAllPages ||
+        (!$config->tinytoc_settings_general->tocOnAllPages && $currentPage === 1))) ?
     str_replace(
-            '%image%', 
-            $config->tinytoc_settings_backtotop->image, 
+            '%image%',
+            $config->tinytoc_settings_backtotop->image,
             $config->tinytoc_settings_backtotop->text
     ) : '';
-    
+
     return $replace;
 }
 
@@ -478,10 +470,10 @@ function callbackReplace($matches)
 function checkIfWeNeedToParse()
 {
 	global $post;
-	
+
 	//Get parsing config.
 	$config = tinyConfig::getInstance()->get('tinytoc_settings_parse');
-	
+
 	//Check if we have enabled settings that we need to parse this request.
 	if (is_home() && !$config->tinytoc_settings_parse->parseHomePage)
 	    return false;
@@ -500,7 +492,7 @@ function checkIfWeNeedToParse()
     if ($post->post_type === 'page' && !$config->tinytoc_settings_parse->parsePage)
          return false;
     if (
-         in_array($post->ID, $config->tinytoc_settings_parse->postExclude) || 
+         in_array($post->ID, $config->tinytoc_settings_parse->postExclude) ||
          in_array($post->ID, $config->tinytoc_settings_parse->pageExclude)
     )
          return false;
