@@ -372,8 +372,18 @@ function startContentParsing($data)
 
     $toc .= $config->tinytoc_settings_tocstyle->endList;
 
-    return ((!$config->tinytoc_settings_general->tocOnAllPages && $currentPage > 1 ) ? '' : $toc )
-        . $data;
+    $toc .= "\n";
+
+    $toc .= '<!-- Table of contents generated with `Tiny Table Of Contents` (http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/) by Marijan Šuflaj -->';
+
+    if (!(!$config->tinytoc_settings_general->tocOnAllPages && $currentPage > 1 )) {
+        if (strpos($data, '[tinytoc]'))
+            $data = str_replace('[tinytoc]', $toc, $data);
+        else
+            $data = $toc . $data;
+    }
+
+    return $data;
 }
 
 /**

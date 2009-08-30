@@ -16,6 +16,10 @@ some predefined styles and more styling control.
 
 == Changelog ==
 
+= Ver 0.8.30 (released 2009-08-30) =
+-------------------------------------------------------------------
+* You can now position TOC by inserting [tinytoc] in your code
+
 = Ver 0.8.12 (released 2009-08-12) =
 -------------------------------------------------------------------
 * Fixed custom styling on each level
