@@ -462,12 +462,7 @@ function callbackReplace($matches)
     $replace .= $config->tinytoc_settings_general->useGoTo ? '</span>' : '';
     $replace .= ($config->tinytoc_settings_general->useBackToTop
         && ($config->tinytoc_settings_general->tocOnAllPages ||
-        (!$config->tinytoc_settings_general->tocOnAllPages && $currentPage === 1))) ?
-    str_replace(
-            '%image%',
-            $config->tinytoc_settings_backtotop->image,
-            $config->tinytoc_settings_backtotop->text
-    ) : '';
+        (!$config->tinytoc_settings_general->tocOnAllPages && $currentPage === 1))) ? $config->tinytoc_settings_backtotop->html : '';
 
     return $replace;
 }

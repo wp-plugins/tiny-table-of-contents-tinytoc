@@ -228,41 +228,33 @@ $config = tinyConfig::getInstance()->get('');
     <h4>Back to top</h4>
     <table class="widefat" style="width: 500px">
         <thead>
-            <tr>
-                <th width="49%">
-                    Option
-                </th>
-                <th>
-                    Value
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    Image:
-                </td>
-                <td>
-                    <?php echo $config->tinytoc_settings_backtotop->image; ?>
-                </td>
-            </tr>
-            <tr class="alternate">
-                <td>
-                    Text:
-                </td>
-                <td>
-                    <?php echo htmlentities($config->tinytoc_settings_backtotop->text); ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Css:
-                </td>
-                <td>
-                    <?php echo htmlentities($config->tinytoc_settings_backtotop->css); ?>
-                </td>
-            </tr>
-        </tbody>
+                <tr>
+                    <th width="49%">
+                        Option
+                    </th>
+                    <th>
+                        Value
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        Html:
+                    </td>
+                    <td>
+                        <?php echo htmlentities($config->tinytoc_settings_backtotop->html); ?>
+                    </td>
+                </tr>
+                <tr class="alternate">
+                    <td>
+                        Css:
+                    </td>
+                    <td>
+                        <?php echo htmlentities($config->tinytoc_settings_backtotop->css); ?>
+                    </td>
+                </tr>
+            </tbody>
     </table>
 
     <h4>Table of contents style</h4>

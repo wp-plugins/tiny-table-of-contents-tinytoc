@@ -1,9 +1,10 @@
 === Tiny Table Of Contents - TinyTOC ===
 Contributors: zlikavac32
 Tags: content, table, tiny, tinytoc, toc, bookmark, simple, easy
+Donate link: http://amzn.com/w/38P1LI34GI7NV
 Requires at least: 2.0.2
-Tested up to: 2.8.4
-Stable tag: 0.8.30
+Tested up to: 2.9
+Stable tag: 0.12.31
 
 Plugin that enables you to create table of contents in your posts and pages. It's very simple to use from your editor.
 
@@ -15,6 +16,10 @@ so you do not have to manualy enter tags. Now it's nothing special, but later it
 some predefined styles and more styling control.
 
 == Changelog ==
+
+= Ver 0.12.31 (released 2009-12-31) =
+-------------------------------------------------------------------
+* Fixed bugs reported by [Navjot Singh](http://nspeaks.com/)
 
 = Ver 0.8.30 (released 2009-08-30) =
 -------------------------------------------------------------------
@@ -45,6 +50,12 @@ some predefined styles and more styling control.
 -------------------------------------------------------------------
 * Plugin first version
 
+== Upgrade Notice ==
+
+= Ver 0.12.31 (released 2009-12-31) =
+-------------------------------------------------------------------
+This version fixes problems with custom position of Table Of Contents. Note that I tested it with 10 different sites and plugin passed. If you still have problems, please report.
+
 == Installation ==
 
 1. Upload folder `tiny-table-of-contents-tinytoc` to your `/wp-content/plugins` directory
@@ -59,15 +70,15 @@ When you go to your post editor you will see drop down menu "TOC Levels". Select
 You have to add `<img />` tag to your text with path to that image as `src` attribute value.
 
 = Can I add text before TOC? =
-Currently you can not, but it will be avilable in next versions.
+If you add `[tinytoc]` after that text, yes.
 
 = Can I chose TOC position? =
-No, you can not, but it will also be avilable in next versions.
+Yes, by placing `[tinytoc]` in your text.
 
 = How can I remove `Header` and still be able to use `Back to top` feature? =
 In order to use `Backt to top` you need to have some tag with some ID. Just add `style="display: none;"` to your `Html before title` field in tag. If you have default example `<h3 id="tyinTOC">` then you would have `<h3 id="tyinTOC" style="display: none;">`. That will remove Title before table of contents and still allow you to use `Back to top` feature.
 
-= How do you know what each of these fields mean? =
+= How do I know what each of these fields mean? =
 Visit [documentation](http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/#Documentation-1).
 
 == Screenshots ==
@@ -81,9 +92,6 @@ Visit [documentation](http://php4every1.com/scripts/tiny-table-of-contents-wordp
 
 == Planned Features ==
 
-* Custom TOC position
-* Custom text before TOC
-* Custom styling for each level
 * Custom TOC tag (so you dont have to use `[tinytoc lev="lv"]cont[/tinytoc]`)
 
 == Source SVN ==
