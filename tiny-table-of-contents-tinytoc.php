@@ -8,7 +8,7 @@
     Plugin Name: Tiny Table Of Content - TinyTOC
     Plugin URI: http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/
     Description: Advanced plugin for dynamic creation of "Table of content" for you post or pages.
-    Version: 0.8.30
+    Version: 0.12.31
     Author: Marijan Šuflaj
     Author URI: http://www.php4every1.com
 */
@@ -35,7 +35,7 @@
 define('IN_PLUGIN', true);
 
 //Current version.
-define('CURR_VER', '0.8.12');
+define('CURR_VER', '0.12.31');
 
 //Load config class.
 require_once 'classes/config.php';
