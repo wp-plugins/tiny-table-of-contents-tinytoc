@@ -4,7 +4,7 @@ Tags: content, table, tiny, tinytoc, toc, bookmark, simple, easy
 Donate link: http://amzn.com/w/38P1LI34GI7NV
 Requires at least: 2.0.2
 Tested up to: 2.9
-Stable tag: 0.12.31
+Stable tag: 1.6.3
 
 Plugin that enables you to create table of contents in your posts and pages. It's very simple to use from your editor.
 
@@ -16,6 +16,10 @@ so you do not have to manualy enter tags. Now it's nothing special, but later it
 some predefined styles and more styling control.
 
 == Changelog ==
+
+= Ver 1.6.3 (released 2010-06-03) =
+-------------------------------------------------------------------
+* Bugs fixed and code improved by Matjaž Peèan
 
 = Ver 0.12.31 (released 2009-12-31) =
 -------------------------------------------------------------------

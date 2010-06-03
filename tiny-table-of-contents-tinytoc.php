@@ -35,7 +35,7 @@
 define('IN_PLUGIN', true);
 
 //Current version.
-define('CURR_VER', '0.12.31');
+define('CURR_VER', '1.6.3');
 
 //Load config class.
 require_once 'classes/config.php';
@@ -316,7 +316,6 @@ function startContentParsing($data)
 	$toc = $config->tinytoc_settings_header->before;
 	$toc .= $config->tinytoc_settings_header->title;
 	$toc .= $config->tinytoc_settings_header->after;
-
 	$toc .= $config->tinytoc_settings_tocstyle->startList;
 
 
@@ -325,56 +324,45 @@ function startContentParsing($data)
 	$lastLevel = 1;
 
 	//Loop each match and create url for them.
-    for ($i = 0; $i < $count; $i++) {
+    for ($i = 0; $i < $count ; $i++) {
         $currLevel = (int) $urlStuff[1][$i];
+        //Check if there is a nextItem out of which to get the nextLevel
+        if ($i < $count - 1)
+        	$nextLevel = (int) $urlStuff[1][$i+1];
         if ($currLevel > $lastLevel) {
-            for ($m = $currLevel - 1; $m > $lastLevel; $m--) {
+            for ($m = $currLevel; $m > $lastLevel; $m--) { // add a startList and startItem for each level of difference
                 $toc .= $config->tinytoc_settings_tocstyle->startList;
-                $toc .= $config->tinytoc_settings_general->startItem;
+                $toc .= $config->tinytoc_settings_tocstyle->startItem;
             }
-            //$toc .= $config->tinytoc_settings_tocstyle->startItem;
-            $toc .= $config->tinytoc_settings_tocstyle->startList;
-            $toc .= $config->tinytoc_settings_tocstyle->startItem;
-            $toc .= $config->tinytoc_settings_general->useGoTo ?
-                createGoToUrl($urlStuff[0][$i], $currentPage, $urlStuff[1][$i],$urlStuff[2][$i]) :
-                $urlStuff[2][$i];
-            //$toc .= $config->tinytoc_settings_general->endItem;
         }
         elseif ($lastLevel > $currLevel) {
-	        for ($m = $lastLevel - 1; $m > $currLevel; $m--) {
+	        for ($m = $lastLevel ; $m > $currLevel; $m--) { // add a endList and endItem for each level of difference
 		        $toc .= $config->tinytoc_settings_tocstyle->endList;
-		        $toc .= $config->tinytoc_settings_general->endItem;
+		        $toc .= $config->tinytoc_settings_tocstyle->endItem;
 		    }
-		    $toc .= $config->tinytoc_settings_tocstyle->endItem;
-            $toc .= $config->tinytoc_settings_tocstyle->endList;
-			$toc .= $config->tinytoc_settings_general->endItem;
             $toc .= $config->tinytoc_settings_tocstyle->startItem;
-            $toc .= $config->tinytoc_settings_general->useGoTo ?
+        }
+		else {
+            $toc .= $config->tinytoc_settings_tocstyle->startItem;
+
+        }
+        $toc .= $config->tinytoc_settings_general->useGoTo ?
                 createGoToUrl($urlStuff[0][$i], $currentPage, $urlStuff[1][$i],$urlStuff[2][$i]) :
                 $urlStuff[2][$i];
-            $toc .= $config->tinytoc_settings_tocstyle->endItem;
-        }
-        else {
-            $toc .= $config->tinytoc_settings_tocstyle->startItem;
-            $toc .= $config->tinytoc_settings_general->useGoTo ?
-                createGoToUrl($urlStuff[0][$i], $currentPage, $urlStuff[1][$i],$urlStuff[2][$i]) :
-                $urlStuff[2][$i];
-            //$toc .= $config->tinytoc_settings_tocstyle->endItem;
-        }
+        if( $nextLevel <= $currLevel) // add an endItem if the next level item is on the same or on a lower level
+            	$toc .= $config->tinytoc_settings_tocstyle->endItem;
         $lastLevel = $currLevel;
     }
 
     //Cleanup
 	for ($m = 1; $m < $lastLevel; $m++) {
 	    $toc .= $config->tinytoc_settings_tocstyle->endList;
-		$toc .= $config->tinytoc_settings_general->endItem;
+		$toc .= $config->tinytoc_settings_tocstyle->endItem;
 	}
 
     $toc .= $config->tinytoc_settings_tocstyle->endList;
-
     $toc .= "\n";
-
-    $toc .= '<!-- Table of contents generated with `Tiny Table Of Contents` (http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/) by Marijan Šuflaj -->';
+	//$toc .= '<!-- Table of contents generated with `Tiny Table Of Contents` (http://php4every1.com/scripts/tiny-table-of-contents-wordpress-plugin/) by Marijan Suflaj -->'; // where the hell does the <p> come from... if this line is commented out i do not get a <p> tag (without a closing as well)
 
     if (!(!$config->tinytoc_settings_general->tocOnAllPages && $currentPage > 1 )) {
         if (strpos($data, '[tinytoc]'))

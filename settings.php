@@ -53,7 +53,7 @@ if (!defined('IN_PLUGIN'))
 	                    <div id="maxLevelNum" style="display: inline;">
                             <?php echo $config->tinytoc_settings_general->maxLevelNum; ?>
                         </div>
-                        <a onclick="incDecLevelNum(true)" href="#">+</a>/<a onclick="incDecLevelNum(false)" href="#">-</a>
+                        <a onclick="return incDecLevelNum(true)" href="#">+</a>/<a onclick="return incDecLevelNum(false)" href="#">-</a>
 	                </td>
 	            </tr>
 	            <tr>
@@ -118,7 +118,7 @@ if (!defined('IN_PLUGIN'))
                         Use chapter level styling:
                     </td>
                     <td>
-                        <input type="checkbox" onclick="hideUnhide(this);" name="useChapterLevelStyling" <?php checked('1', $config->tinytoc_chapter_styling->useChapterLevelStyling); ?> />
+                        <input type="checkbox" onclick="return hideUnhide(this);" id="useChapterLevelStyling" name="useChapterLevelStyling" <?php checked('1', $config->tinytoc_chapter_styling->useChapterLevelStyling); ?> />
                     </td>
                 </tr>
                 <tr class="alternate">
