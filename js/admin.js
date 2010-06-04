@@ -9,6 +9,7 @@ function incDecLevelNum(inc)
 	}
 }
 
+
 function hideUnhide(e)
 {
 	if (jQuery(e).is(':checked'))
